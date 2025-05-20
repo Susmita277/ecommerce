@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+/* ✅ Plugin config */
+@custom-variant dark (&:where(.dark, .dark *));
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+    name: "sunset";
+    default: false;
+    prefersdark: false;
+    --font-poppins: 'Poppins', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+    --font-sans: var(--font-inter);
+
+    --color-primary: #1c3983;
+    --color-accent: #FFD700;
+    --color-neutral: oklch(28% 0.091 267.935);
+    --color-neutral-content: oklch(97% 0.014 254.604);
+    --color-info: oklch(70% 0.165 254.624);
+    --color-info-content: oklch(28% 0.091 267.935);
+    --color-success: oklch(77% 0.152 181.912);
+    --color-success-content: oklch(27% 0.046 192.524);
+    --color-warning: oklch(75% 0.183 55.934);
+    --color-warning-content: oklch(26% 0.079 36.259);
+    --color-error: oklch(70% 0.191 22.216);
+    --color-error-content: oklch(25% 0.092 26.042);
+    --color-base-100: #ffffff;
+    --color-base-content: #1c3983;
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-white);
+        --color-accent-content: var(--color-white);
+        --color-accent-foreground: var(--color-neutral-800);
+    }
+}
+
+@layer base {
+    html {
+        font-family: var(--font-sans);
+    }
+
+    h1 {
+        font-family: var(--font-poppins);
+        @apply text-5xl font-semibold tracking-wide leading-[1.4];
+    }
+
+    h2 {
+        font-family: var(--font-poppins);
+        @apply text-4xl font-semibold tracking-wide leading-[1.2] py-4 capitalize;
+    }
+
+    h3 {
+        font-family: var(--font-poppins);
+        @apply text-3xl font-semibold tracking-wide;
+    }
+
+    h4 {
+        font-family: var(--font-poppins);
+        @apply text-xl font-semibold tracking-wide py-1 capitalize;
+    }
+
+    h5 {
+        font-family: var(--font-poppins);
+        @apply text-[16px] font-semibold tracking-wide capitalize;
+    }
+
+    h6 {
+        font-family: var(--font-poppins);
+        @apply text-sm font-semibold tracking-wide;
+    }
+
+    p {
+        font-family: var(--font-inter);
+        @apply text-gray-700 tracking-wide font-medium text-lg;
+    }
+
+    span {
+        font-family: var(--font-inter);
+        @apply tracking-wide font-medium text-sm;
+    }
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+/* ✅ Button styles outside base layer */
+.pbtn {
+    font-family: var(--font-poppins);
+    @apply py-2 px-4 outline-none rounded-md cursor-pointer transition-all capitalize text-[16px] font-semibold border border-blue-900 text-blue-900 hover:bg-primary hover:text-white;
+}
+
+.modalbtn {
+    font-family: var(--font-poppins);
+    @apply py-2 px-4 outline-none rounded-md cursor-pointer transition-all capitalize text-[14px] font-semibold border border-blue-900 text-blue-900;
+}
+
+.mbtn {
+    font-family: var(--font-poppins);
+    @apply py-3 px-6 outline-none rounded-md cursor-pointer transition-all capitalize text-[16px] font-semibold bg-blue-900 text-white;
+}
+
+.cancel {
+    font-family: var(--font-poppins);
+    @apply py-2 px-4 outline-none rounded-md cursor-pointer transition-all capitalize text-[14px] font-semibold bg-red-600 text-white;
+}
+
+/* Flux form tweaks */
+[data-flux-field]:not(ui-radio, ui-checkbox) {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
