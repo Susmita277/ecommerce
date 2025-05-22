@@ -17,9 +17,11 @@
             <div class="border border-gray-200 rounded-xl p-3">
                 <div class="relative">
                     <div class="h-[200px] overflow-hidden rounded-xl">
-                    @foreach ($product->images as $image)
-                        <img src="{{ asset('storage/' . $image) }}" class="w-full h-full object-cover object-center" />
-                    @endforeach</div>
+                        @foreach ($product->images as $image)
+                            <img src="{{ asset('storage/' . $image) }}"
+                                class="w-full h-full object-cover object-center" />
+                        @endforeach
+                    </div>
                     <div class="absolute top-2 right-2 rounded-full p-2 flex items-center bg-[var(--color-accent)] hover:opacity-70"
                         wire:click="$emit('addToWishlist', {{ $product->id }})">
                         <!-- Heart Icon -->
@@ -40,7 +42,6 @@
                         <span class="text-[var(--color-primary)]">{{ $product->discount }}off</span>
                     </div>
                 </div>
-
                 <div class="mbtn text-center w-full flex justify-center gap-2 items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="#ffffff" class="size-6">
@@ -52,6 +53,7 @@
                         Add to Cart
                     </button>
                 </div>
+            
             </div>
         @endforeach
     </div>
