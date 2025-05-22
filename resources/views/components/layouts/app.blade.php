@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="sunset">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,14 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
+
 <body class="text-black">
-    <x-layouts.partials.header/>
+    <x-layouts.partials.header />
     {{ $slot }}
-    {{-- <x-layouts.partials.footer/> --}}
+    <x-layouts.partials.footer />
+
+
+
 </body>
+
 </html>

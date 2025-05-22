@@ -41,41 +41,30 @@
 
 
         <li class="flex gap-3 items-center ">
-            <label for="my-drawer-4"
+                <label for="my-drawer-4"
                 class="rounded-full p-2 flex items-center justify-center bg-[var(--color-accent)] relative cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="#ffffff" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                 </svg>
-                <span x-show="$store.app.cart.length > 0" x-text="$store.app.cart.length"
-                    class="absolute -top-3 p-1 -right-1 w-6 h-6 bg-red-500 rounded-full flex text-white items-center justify-center"></span>
+
             </label>
-            <label for="my-drawer-3"
-                class="rounded-full p-2 flex items-center justify-center bg-[var(--color-accent)] relative cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="#ffffff" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
-
-                <span x-show="$store.app.wishlist.length > 0"
-                    class="absolute -top-3 p-1 -right-1 bg-red-500 text-white text-sm w-6 h-6 flex items-center justify-center rounded-full"
-                    x-text="$store.app.wishlist.length"></span></label>
             <!-- Trigger Button -->
-            <div class="rounded-full p-2 flex items-center justify-center bg-gray-200"
-                onclick="login_modal.showModal()">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="#ffffff" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-
-            </div>
+                <div class="rounded-full p-2 flex items-center justify-center bg-accent "
+                    onclick="login_modal.showModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="#ffffff" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                </div>
+             
+           
         </li>
     </ul>
 
-    <ul class="bg-gray-200 py-2 flex gap-6 px-12 items-center">
+    <ul class="border-t border-gray-200 py-2 flex gap-6 px-12 items-center">
         <li>
             <div class="dropdown">
                 <div class="mbtn flex gap-1 items-center" tabindex="0">
@@ -102,20 +91,16 @@
             </div>
         </li>
         <li>
-            <a href="home.html">
+            <a href="{{ route('home') }}">
                 <h5>Home</h5>
             </a>
         </li>
         <li>
-            <h5><a href="allproduct.html">all products</a></h5>
+            <h5><a href="{{ route('products') }}">all products</a></h5>
         </li>
+
         <li>
-            <a href="aboutus.html">
-                <h5>about</h5>
-            </a>
-        </li>
-        <li>
-            <a href="contact.html">
+            <a href="{{ route('contacts') }}">
                 <h5>contact</h5>
             </a>
         </li>
@@ -128,7 +113,8 @@
 
 
 <!--components started from here -->
-<!--card modal start-->
+
+<!--card modal -->
 <div class="drawer drawer-end">
     <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
     <div class="drawer-side z-100">
@@ -141,8 +127,7 @@
                     </label>
                     <h5>My Cart <mark class="text-[var(--text-primary)] bg-[var(--color-neutral)]">(1)</mark></h5>
                 </div>
-                <div class="flex gap-2 items-center" x-show="$store.app.cart.length >0"
-                    @click="$store.app.clearCart()">
+                <div class="flex gap-2 items-center" x-show="$store.app.cart.length >0" @click="$store.app.clearCart()">
                     <span x-hugeicon:delete class="w-6 h-6 text-red-500"></span>
                     <h5>clear</h5>
                 </div>
@@ -234,10 +219,8 @@
         </div>
     </div>
 </div>
-</div>
-<!--card modal end-->
 
-
+<!--cart end-->
 <!-- Login Modal -->
 <dialog id="login_modal" class="modal">
     <div class="modal-box p-8">
@@ -254,8 +237,7 @@
         <form class="space-y-4">
             <!-- Email -->
             <input type="email" placeholder="Enter Email"
-                class="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-md pr-10 outline-none"
-                required />
+                class="w-full p-2 border border-gray-200 dark:border-gray-700 rounded-md pr-10 outline-none" required />
 
             <!-- Password -->
             <div class="flex w-full  flex-col gap-1 text-on-surface dark:text-on-surface-dark">
@@ -429,106 +411,3 @@
     </form>
 </dialog>
 <!--signup modal end-->
-
-<!--favourite modal start-->
-<div class="drawer drawer-end ">
-    <input id="my-drawer-3" type="checkbox" class="drawer-toggle " />
-    <div class="drawer-side z-100">
-        <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
-        <div class="bg-white w-[30%] p-5 h-screen z-60">
-            <div class="flex justify-between items-center">
-                <div class="flex gap-2 items-center">
-                    <label for="my-drawer-3" class="cursor-pointer">
-                        <span x-hugeicon:left class="w-8 h-8 text-black"></span>
-                    </label>
-                    <h5>My Wishlist <mark class="text-[var(--text-primary)] bg-[var(--color-neutral)]">(1)</mark></h5>
-                </div>
-                <div class="flex gap-2 items-center" @click="$store.app.clearWishlist()"
-                    x-show="$store.app.wishlist.length > 0">
-                    <span x-hugeicon:delete class="w-6 h-6 text-red-500"></span>
-                    <h5>clear</h5>
-                </div>
-            </div>
-
-            <div x-show="$store.app.wishlist.length === 0" class="flex justify-center items-center pt-24">
-                <div>
-                    <div class="w-[200px] h-[200px]"><img
-                            src="https://shop.nmc.coop.np/images/illustrations/emptywishlist.webp"
-                            class="w-full h-full object-cover"></div>
-                    <p class="text-center my-2">Your <strong>Wishlist</strong> is empty</p>
-                    <a href="allproduct.html" class="flex justify-center">
-                        <div
-                            class="flex justify-center gap-2  py-2 px-4 w-fit my-4 rounded-full transition-all capitalize text-[14px] font-semibold border border-primary text-primary font-[var(--font-poppins) ]">
-                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" color="currentColor">
-                                <path
-                                    d="M12 22C11.1818 22 10.4002 21.6698 8.83693 21.0095C4.94564 19.3657 3 18.5438 3 17.1613C3 16.7742 3 10.0645 3 7M12 22C12.8182 22 13.5998 21.6698 15.1631 21.0095C19.0544 19.3657 21 18.5438 21 17.1613V7M12 22L12 11.3548"
-                                    stroke="currentColor"></path>
-                                <path
-                                    d="M8.32592 9.69138L5.40472 8.27785C3.80157 7.5021 3 7.11423 3 6.5C3 5.88577 3.80157 5.4979 5.40472 4.72215L8.32592 3.30862C10.1288 2.43621 11.0303 2 12 2C12.9697 2 13.8712 2.4362 15.6741 3.30862L18.5953 4.72215C20.1984 5.4979 21 5.88577 21 6.5C21 7.11423 20.1984 7.5021 18.5953 8.27785L15.6741 9.69138C13.8712 10.5638 12.9697 11 12 11C11.0303 11 10.1288 10.5638 8.32592 9.69138Z"
-                                    stroke="currentColor"></path>
-                                <path d="M6 12L8 13" stroke="currentColor"></path>
-                                <path d="M17 4L7 9" stroke="currentColor"></path>
-                            </svg>
-                            <button class="outline-none">Add Products</button>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- product cart-->
-            <div class="py-4 flex-col overflow-y-auto scrollbar-hide max-h-[calc(100vh-150px)]"
-                x-show="$store.app.wishlist.length > 0">
-                <template x-for="(item,index) in $store.app.wishlist" :key="">
-                    <div class="grid grid-cols-5 gap-4 py-4 border-b border-gray-100">
-                        <div class="col-span-4  ">
-                            <div class="flex gap-4">
-                                <div class="rounded-xl overflow-hidden w-[150px] h-[100px]">
-                                    <img :src="item.image" class="w-full h-full object-cover">
-                                </div>
-                                <div>
-                                    <div>
-                                        <span class="font-semibold" x-text="item.name"></span>
-                                    </div>
-                                    <button
-                                        class="mbtn text-center flex gap-2 justify-center my-2  w-[180px] px-4 py-2"
-                                        @click="$store.app.addToCart(item)" :disabled="$store.app.isInCart(item)">
-                                        <!-- Cart Icon (Shows when NOT in cart) -->
-                                        <svg x-show="!$store.app.isInCart(item)" class="w-5 h-5"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z">
-                                            </path>
-                                        </svg>
-
-                                        <!-- Checkmark Icon (Shows when IN cart) -->
-                                        <svg x-show="$store.app.isInCart(item)" class="w-5 h-5"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                            fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-
-                                        <!-- Text (Changes based on cart state) -->
-                                        <span x-text="$store.app.isInCart(item) ? 'In Cart' : 'Add to Cart'"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="grid  justify-end">
-                            <div @click="$store.app.removeWishlist(index)" class="cursor-pointer"> <span
-                                    x-hugeicon:delete class="w-6 h-6 text-red-500"></span></div>
-                            <h5 class="self-end text-primary" x-text="item.price">
-                            </h5>
-                        </div>
-                    </div>
-                </template>
-            </div>
-        </div>
-    </div>
-</div>
-<!--favourite modal end-->
