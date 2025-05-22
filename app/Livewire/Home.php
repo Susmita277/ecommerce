@@ -7,18 +7,16 @@ use Livewire\Component;
 use App\Models\Product;
 
 class Home extends Component
-{
+{  
    
-     public function render()
+
+    public function render()
     {
         $newArrivals = Product::latest()->take(4)->get();
-        $categories = Category::all();
+        $categories = Category::where('is_active',1)->get();
         $topProducts = Product::oldest()->take(4)->get();
 
-        return view('livewire.home', compact('newArrivals','categories','topProducts'));
+
+        return view('livewire.home', compact('newArrivals', 'categories', 'topProducts'));
     }
-    
- 
 }
-
-
