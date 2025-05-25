@@ -4,6 +4,7 @@ use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Home;
 use App\Livewire\Allproduct;
+use App\Livewire\Checkoutpage;
 use App\Livewire\Contact;
 use App\Livewire\ProductDetailPage;
 use App\Livewire\Settings\Profile;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Home::class)->name('home');
 Route::get('/products',Allproduct::class)->name('products');
 Route::get('/contacts',Contact::class)->name('contacts');
+Route::get('/checkout',Checkoutpage::class)->name('checkout');
 Route::get('/products/{slug}',ProductDetailPage::class);
 
 // Route::view('dashboard', 'dashboard')
