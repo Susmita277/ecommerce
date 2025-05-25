@@ -23,6 +23,7 @@ class Register extends Component
 
     /**
      * Handle an incoming registration request.
+     * p
      */
     public function register(): void
     {
