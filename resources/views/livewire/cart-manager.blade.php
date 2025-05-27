@@ -101,7 +101,7 @@
                     <h4>{{ $this->calculateTotalPrice() }}</h4>
                 </div>
 
-                <a href="checkout.html">
+                <a href="/checkout">
                     <div class="absolute bottom-5 left-5 right-5">
                         <div class="mbtn flex gap-2 justify-center items-center">
                             <h5>Proceed</h5>
