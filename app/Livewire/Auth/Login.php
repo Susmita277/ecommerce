@@ -11,7 +11,7 @@ class Login extends Component
     {
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             session()->regenerate();
-            return redirect('/');
+            return redirect()->intended();
         }
 
         $this->addError('email', 'Invalid credentials.');
