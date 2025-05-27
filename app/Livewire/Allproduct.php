@@ -26,28 +26,32 @@ class Allproduct extends Component
     {
         $this->cart = CartManagement::get();
     }
+ 
 
 
-public function addToCart($productId)
-{
-    $alreadyInCart = collect($this->cart)->pluck('product_id')->contains($productId);
+    public function addToCart($productId)
+    {
+        $total_count = CartManagement::addToCart($productId);
+        $this->dispatch('update-cart-count',total_count:$total_count)->to(CartManager::class);
+        // $alreadyInCart = collect($this->cart)->pluck('product_id')->contains($productId);
 
-    if ($alreadyInCart) {
-        $this->dispatch('cart-toast', [
-            'message' => 'Already in cart',
-            'type' => 'warning',
-        ]);
-        return;
+        // if ($alreadyInCart) {
+        //     $this->dispatch('cart-toast', [
+        //         'message' => 'Already in cart',
+        //         'type' => 'warning',
+        //     ]);
+        //     return;
+        // }
+
+        // \App\Helpers\CartManagement::addToCart($productId);
+        // $this->cart = \App\Helpers\CartManagement::get();
+
+        // $this->dispatch('cart-toast', [
+        //     'message' => 'Added to cart',
+        //     'type' => 'success',
+        // ]);
+
     }
-
-    \App\Helpers\CartManagement::addToCart($productId);
-    $this->cart = \App\Helpers\CartManagement::get();
-
-    $this->dispatch('cart-toast', [
-        'message' => 'Added to cart',
-        'type' => 'success',
-    ]);
-}
 
 
 
