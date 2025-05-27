@@ -1,11 +1,7 @@
 <!-- Signup Modal -->
 
-<div x-data="{ open: false }" x-show="open" @open-register.window="open = true" @close-login.window="open = false"
-    class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-
-    <div class="bg-white p-8 rounded-md shadow-md w-full max-w-md relative">
-        <!-- Close button -->
-        <button type="button" @click="open = false" class="absolute right-5 top-5">✕</button>
+<div class="flex justify-center py-24 ">
+    <div class="w-[30%] p-5 rounded-xl shadow-md">
         <div class="text-center">
             <h4>Create Account</h4>
             <span class="text-gray-500">Join us! Enter your details to create an account.</span>
@@ -113,7 +109,7 @@
             <div class="flex items-center text-center justify-center text-gray-500">
                 <span>
                     Already have an account?
-                    <a href="#" @click.prevent="$dispatch('close-login'); $dispatch('open-register')" class="link font-semibold">Log in</a>
+                    <a href="{{ route('login') }}" class="link font-semibold">Log in</a>
                 </span>
             </div>
         </form>
