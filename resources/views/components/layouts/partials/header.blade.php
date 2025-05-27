@@ -42,26 +42,29 @@
 
         <li class="flex gap-5 items-center ">
             <label for="my-drawer-4" class="cursor-pointer flex gap-1 items-center">
+
+                @php
+                    $cart = \App\Helpers\CartManagement::get();
+                @endphp
                 <h5>Cart</h5>
-                <h5 class="text-blue-900">(0)</h5>
+                <h5 class="text-accent">({{ count($cart) }})</h5>
             </label>
             @guest
                 <!-- Trigger Button -->
                 <div class="flex gap-2 items-center cursor-pointer">
-                    <div class="rounded-full p-2 flex items-center justify-center bg-gray-200 "
-                        onclick="login_modal.showModal()">
-                        <button onclick="window.dispatchEvent(new CustomEvent('open-login'))" class="outline-none">
+                    <div class="rounded-full p-2 flex items-center justify-center bg-gray-200 ">
+                        <a href="{{route('login')}}"> 
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="#000000" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                            </svg></button>
+                            </svg></a>
                     </div>
                     <div>
                         <h5>Account</h5>
                         <div>
-                            <span class="text-primary cursor-pointer" onclick="window.dispatchEvent(new CustomEvent('open-login'))">sign in/</span>
-                            <span class="text-primary" onclick="window.dispatchEvent(new CustomEvent('open-register'))">create</span>
+                            <a href="{{route('login')}}"><span class="text-primary cursor-pointer">sign in/</span></a>
+                            <a href="{{route('register')}}"><span class="text-primary">create</span></a>
                         </div>
                     </div>
                 </div>
@@ -105,6 +108,7 @@
                 </div>
                 <ul class="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow-md mt-2 z-50">
                     <template x-for="cat in $store.app.categories" :key="cat.id">
+
                         <li>
                             <a href="/allproduct.html"
                                 @click.prevent="
@@ -114,6 +118,7 @@
                                 x-text="cat.name" class="capitalize"></a>
                         </li>
                     </template>
+        
                 </ul>
             </div>
         </li>
@@ -127,7 +132,7 @@
         </li>
 
         <li>
-            <a href="{{ route('checkout') }}">
+            <a href="{{ route('contacts') }}">
                 <h5>contact</h5>
             </a>
         </li>
@@ -141,5 +146,4 @@
 
 <!--components started from here -->
 @livewire('cart-manager')
-@livewire('auth.login')
-@livewire('auth.register')
+
