@@ -13,7 +13,10 @@ class CartManager extends Component
     {
         $this->loadCart();
     }
-
+  public function getCartCountProperty()
+{
+    return count($this->cart);
+}
     public function loadCart()
     {
         $this->cart = CartManagement::get();
