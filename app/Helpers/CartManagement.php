@@ -7,6 +7,7 @@ use App\Models\Product;
 
 class CartManagement
 {
+
     public $cart =[];
     public function isInCart($productId)
 {
