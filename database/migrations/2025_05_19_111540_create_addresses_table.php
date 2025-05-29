@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
             $table->text('street_address')->nullable();
             $table->string('city')->nullable();
+            $table->string('phone');
             $table->timestamps();
         });
     }

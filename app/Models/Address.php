@@ -12,6 +12,7 @@ class Address extends Model
             'order_id',
             'street_address',
             'city',
+            'phone',
         ];
         public function order(){
             return $this->belongsTo(Order::class);
