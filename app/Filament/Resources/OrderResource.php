@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Filament\Resources;
-
 use App\Filament\Resources\OrderResource\Pages;
-use App\Filament\Resources\OrderResource\RelationManagers;
+use App\Filament\Resources\OrderResource\RelationManagers\AddressRelationManager;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Number;
@@ -13,6 +11,10 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Section;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Support\Facades\Format;
 use Filament\Forms\Set;
 use Filament\Forms\Get;
@@ -22,6 +24,7 @@ use Filament\Forms\Components\TextArea;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -69,21 +72,21 @@ class OrderResource extends Resource
                             ->required()
                             ->options([
                                 'new' => 'New',
-                                'processsing' => 'Processing',
+                                'processing' => 'Processing',
                                 'shipped' => 'Shipped',
                                 'delivered' => 'Delivered',
                                 'cancelled' => 'Cancelled',
                             ])
                             ->colors([
                                 'new' => 'info',
-                                'processsing' => 'warning',
+                                'processing' => 'warning',
                                 'shipped' => 'info',
                                 'delivered' => 'success',
                                 'cancelled' => 'danger',
                             ])
                             ->icons([
                                 'new' => 'heroicon-m-sparkles',
-                                'processsing' => 'heroicon-m-arrow-path',
+                                'processing' => 'heroicon-m-arrow-path',
                                 'shipped' => 'heroicon-m-truck',
                                 'delivered' => 'heroicon-m-check-badge',
                                 'cancelled' => 'heroicon-m-x-circle',
@@ -174,9 +177,9 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                 ->label('Customer')
-                 ->sortable()
-                 ->searchable(),
+                    ->label('Customer')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('grand_total')
                     ->sortable()
                     ->money('Rs')
@@ -184,12 +187,28 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('payment_method')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('payment_status')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\SelectColumn::make('status')
+                    ->options([
+                        'new' => 'New',
+                        'processing' => 'Processing',
+                        'shipped' => 'Shipped',
+                        'delivered' => 'Delivered',
+                        'cancelled' => 'Cancelled',
+                    ]),
+
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -201,8 +220,17 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AddressRelationManager::class,
         ];
+    }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return static::getModel()::count() > 10 ? 'success' : 'danger';
     }
 
     public static function getPages(): array
