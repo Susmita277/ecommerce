@@ -9,6 +9,7 @@ class CartManagement
 {
 
     public $cart =[];
+    public $cart_items =[];
     public function isInCart($productId)
 {
     foreach ($this->cart as $item) {
