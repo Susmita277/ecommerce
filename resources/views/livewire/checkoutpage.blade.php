@@ -33,14 +33,26 @@
                 </div>
 
                 <div class="my-6 flex-col">
-                    <div class="mb-2"> <label for="address"
+                    <div class="mb-2"> <label for="street_address"
                             class="w-fit text-gray-500 font-medium text-md font-[var(--font-poppins)] ">Address</label>
                     </div>
                     <div>
-                        <input type="text" placeholder="Muktichowk" wire:model ='address'
+                        <input type="text" placeholder="Muktichowk" wire:model ='street_address'
                             class="w-[350px] text-gray-500 appearance-none rounded-radius border border-gray-200 rounded-md bg-surface-alt px-4 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-75 dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:focus-visible:outline-primary-dark">
                     </div>
-                    @error('address')
+                    @error('street_address')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="my-6 flex-col">
+                    <div class="mb-2"> <label for="phone"
+                            class="w-fit text-gray-500 font-medium text-md font-[var(--font-poppins)] ">Phone Number</label>
+                    </div>
+                    <div>
+                        <input type="number" placeholder="9800000000" wire:model ='phone'
+                            class="w-[350px] text-gray-500 appearance-none rounded-radius border border-gray-200 rounded-md bg-surface-alt px-4 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-75 dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:focus-visible:outline-primary-dark">
+                    </div>
+                    @error('phone')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
@@ -48,7 +60,7 @@
             <div class="py-3">
                 <h5 class="text-gray-900 pb-4">Payment Methods</h5>
 
-                <input type="radio" value="cash" wire:model="payment_method" class="hidden peer" id="payment-cash"
+                <input type="radio" value="cash on delivery" wire:model="payment_method" class="hidden peer" id="payment-cash"
                     checked>
 
                 <label for="payment-cash"
