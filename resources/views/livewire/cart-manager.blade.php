@@ -36,7 +36,7 @@
                                 class="w-full h-full object-cover">
                         </div>
                         <p class="text-center">Your <strong>Cart</strong> is empty</p>
-                        <a href="allproduct.html" class="flex justify-center">
+                        <a href="{{route('products')}}" class="flex justify-center">
                             <div
                                 class="flex justify-center gap-2 py-2 px-4 my-4 rounded-full border border-primary text-primary font-semibold">
                                 <svg class="h-5 w-5" ...></svg>

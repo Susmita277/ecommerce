@@ -20,12 +20,12 @@
                     </svg>
                     <select id="city" name="city" wire:model='city'
                         class="w-[350px] text-gray-400 appearance-none rounded-radius border border-gray-200 rounded-md bg-surface-alt px-4 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-75 dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:focus-visible:outline-primary-dark ">
-                        <option class="text-gray-500" selected>Birtamod</option>
-                        <option value="mac">Ilam</option>
-                        <option value="windows">Phidim</option>
-                        <option value="linux">Kathmandu</option>
-                        <option value="linux">Biratnagar</option>
-                        <option value="linux">Birgunj</option>
+                        <option class="text-gray-500" selected value="Birtamode">Birtamod</option>
+                        <option value="Ilam">Ilam</option>
+                        <option value="Phidim">Phidim</option>
+                        <option value="Kathmandu">Kathmandu</option>
+                        <option value="Biratnagar">Biratnagar</option>
+                        <option value="Birgunj">Birgunj</option>
                     </select>
                     @error('city')
                         <span class="text-red-500">{{ $message }}</span>
@@ -49,7 +49,7 @@
                             class="w-fit text-gray-500 font-medium text-md font-[var(--font-poppins)] ">Phone Number</label>
                     </div>
                     <div>
-                        <input type="number" placeholder="9800000000" wire:model ='phone'
+                        <input type="phone" placeholder="9800000000" wire:model ='phone'
                             class="w-[350px] text-gray-500 appearance-none rounded-radius border border-gray-200 rounded-md bg-surface-alt px-4 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-75 dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:focus-visible:outline-primary-dark">
                     </div>
                     @error('phone')
