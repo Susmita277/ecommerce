@@ -7,36 +7,8 @@
             </a>
         </li>
 
-        <li x-data="searchBox()" class="w-[400px] border border-[var(--color-primary)] rounded-md relative">
-            <div class="flex justify-between">
-                <div>
-                    <input type="search" placeholder="Search here..." x-model="query" @input="filterResults"
-                        @focus="open = true" @click.away="open = false" @keydown.enter.prevent="handleEnter"
-                        class="outline-none p-3 w-[350px]" />
-
-                </div>
-                <div class="bg-primary flex justify-center items-center p-3 cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="#ffffff" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
-
-                </div>
-            </div>
-
-            <!-- Dropdown suggestions -->
-            <ul x-show="open && filtered.length > 0"
-                class="absolute z-10 mt-1 bg-white shadow-md rounded-md w-full max-h-60 overflow-y-auto">
-                <template x-for="item in filtered" :key="item.name">
-
-                    <li @click="selectItem(item)" class="p-2 hover:bg-gray-100 cursor-pointer" x-text="item.name"></li>
-                </template>
-            </ul>
-
-            <!-- Not found message -->
-            <p x-show="open && query && filtered.length === 0"
-                class="text-red-500 p-2 absolute bg-white w-full rounded shadow">Not found</p>
+        <li  class="w-[400px] border border-[var(--color-primary)] rounded-md relative">
+            <livewire:global-product-search />
         </li>
 
 
@@ -53,7 +25,7 @@
                 <!-- Trigger Button -->
                 <div class="flex gap-2 items-center cursor-pointer">
                     <div class="rounded-full p-2 flex items-center justify-center bg-gray-200 ">
-                        <a href="{{route('login')}}"> 
+                        <a href="{{ route('login') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="#000000" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -63,8 +35,8 @@
                     <div>
                         <h5>Account</h5>
                         <div>
-                            <a href="{{route('login')}}"><span class="text-primary cursor-pointer">sign in/</span></a>
-                            <a href="{{route('register')}}"><span class="text-primary">create</span></a>
+                            <a href="{{ route('login') }}"><span class="text-primary cursor-pointer">sign in/</span></a>
+                            <a href="{{ route('register') }}"><span class="text-primary">create</span></a>
                         </div>
                     </div>
                 </div>
@@ -84,7 +56,7 @@
                     </div>
                     <ul tabindex="0" class="dropdown-content menu bg-white  rounded-box z-10 w-56 p-2 shadow-sm">
                         <li><a>My Accounts</a></li>
-                        <li><a>My Orders</a></li>
+                        <li><a href="{{ route('myorder') }}">My Orders</a></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
                 </div>
@@ -107,18 +79,15 @@
                     <div class="text-white capitalize">shop by category</div>
                 </div>
                 <ul class="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow-md mt-2 z-50">
-                    <template x-for="cat in $store.app.categories" :key="cat.id">
-
+                    @foreach ($categories as $cat)
                         <li>
-                            <a href="/allproduct.html"
-                                @click.prevent="
-                            $store.app.selectCategory(cat.id); 
-                            window.location.href = '/allproduct.html';
-                        "
-                                x-text="cat.name" class="capitalize"></a>
+                            <a href="/products?selected_categories[0]={{ $cat->id }}"
+                                wire:key="{{ $cat->id }}"
+                                class="capitalize {{ request('category') == $cat->id ? 'bg-primary text-white' : '' }}">
+                                {{ $cat->name }}
+                            </a>
                         </li>
-                    </template>
-        
+                    @endforeach
                 </ul>
             </div>
         </li>
@@ -146,4 +115,5 @@
 
 <!--components started from here -->
 @livewire('cart-manager')
+
 
