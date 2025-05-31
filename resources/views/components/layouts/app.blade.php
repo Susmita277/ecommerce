@@ -10,7 +10,7 @@
 
 </head>
 
-<body class="text-black">
+<body class="text-black z-0">
     <div id="preloader" class="fixed inset-0 bg-white z-[9999] flex items-center justify-center">
         <div class="animate-spin h-12 w-12 border-4 border-[var(--color-primary)] border-t-transparent rounded-full">
         </div>
@@ -30,6 +30,16 @@
         </div>
     </div>
 
+    
+<script>
+    document.addEventListener('keydown', function(e) {
+        if (e.key === '/') {
+            e.preventDefault();
+            const input = document.getElementById('globalSearch');
+            if (input) input.focus();
+        }
+    });
+</script>
     <script>
             window.addEventListener('load', () => {
         const preloader = document.getElementById('preloader');

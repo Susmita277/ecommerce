@@ -1,5 +1,5 @@
 <!--header-->
-<div>
+<div class="sticky top-0 z-50 bg-white">
     <ul class=" py-4 px-12 flex justify-between items-center ">
         <li>
             <a class="cursor-pointer" href="{{ route('home') }}">
@@ -7,9 +7,6 @@
             </a>
         </li>
 
-        <li  class="w-[400px] border border-[var(--color-primary)] rounded-md relative">
-            <livewire:global-product-search />
-        </li>
 
 
         <li class="flex gap-5 items-center ">
@@ -42,7 +39,7 @@
                 </div>
 
             @endguest
-
+ 
             @auth
                 <div class="dropdown">
                     <div class="gap-2 flex items-center">
@@ -55,7 +52,7 @@
                         </div>
                     </div>
                     <ul tabindex="0" class="dropdown-content menu bg-white  rounded-box z-10 w-56 p-2 shadow-sm">
-                        <li><a>My Accounts</a></li>
+
                         <li><a href="{{ route('myorder') }}">My Orders</a></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
@@ -65,7 +62,7 @@
 
         </li>
     </ul>
-
+</div>
     <ul class="border-t border-gray-200 py-2 flex gap-6 px-12 items-center">
         <li>
             <div class="dropdown">
@@ -100,15 +97,10 @@
             <h5><a href="{{ route('products') }}">all products</a></h5>
         </li>
 
-        <li>
-            <a href="{{ route('contacts') }}">
-                <h5>contact</h5>
-            </a>
-        </li>
-
+       
 
     </ul>
-</div>
+
 
 <!--header end-->
 
