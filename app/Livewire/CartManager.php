@@ -4,19 +4,21 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Helpers\CartManagement;
+use App\Models\Product;
 
 class CartManager extends Component
 {
     public $cart = [];
+      public $outOfStockIndex = null;
 
     public function mount()
     {
         $this->loadCart();
     }
-  public function getCartCountProperty()
-{
-    return count($this->cart);
-}
+    public function getCartCountProperty()
+    {
+        return count($this->cart);
+    }
     public function loadCart()
     {
         $this->cart = CartManagement::get();
@@ -30,11 +32,33 @@ class CartManager extends Component
 
     public function increaseQuantity($index)
     {
-        if (isset($this->cart[$index])) {
-            CartManagement::incrementQuantity($this->cart[$index]['product_id']);
+        $this->outOfStockIndex = null; 
+        // Clear any previous “out of stock” error on mount of this call
+
+        if (! isset($this->cart[$index])) {
+            return;
+        }
+
+        $productId  = $this->cart[$index]['product_id'];
+        $currentQty = $this->cart[$index]['quantity'];
+        $product    = Product::find($productId);
+
+        if ($product && $currentQty < $product->quantity) {
+            // Still under stock → increment
+            CartManagement::incrementQuantity($productId);
+            $this->loadCart();
+        } else {
+            // We hit the stock limit for this $index
+            $this->outOfStockIndex = $index;
+            // We do NOT change the cart quantity, but we want Blade to show the badge here
             $this->loadCart();
         }
     }
+
+
+
+
+
 
     public function decreaseQuantity($index)
     {
