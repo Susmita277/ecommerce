@@ -24,6 +24,12 @@ class CartManagement
     {
         return self::getCartItemsFromCookie();
     }
+    public static function count()
+{
+    return count(self::getCartItemsFromCookie());
+}
+
+
 
     // Add product to cart or increase quantity
     public static function addToCart($product_id)
@@ -55,6 +61,7 @@ class CartManagement
                     'quantity'     => 1,
                     'unit_amount'  => $product->price,
                     'total_amount' => $product->price,
+                    'stock'        => $product->quantity  
                 ];
             }
         }
@@ -93,6 +100,7 @@ class CartManagement
                     'quantity'     => $qty,
                     'unit_amount'  => $product->price,
                     'total_amount' => $product->price,
+                       'stock'        => $product->quantity,
                 ];
             }
         }
