@@ -1,5 +1,4 @@
 <?php
-
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Home;
@@ -9,6 +8,9 @@ use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Logout;
 use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\ResetPassword;
+use App\Livewire\MyOrderDetailPage;
+use App\Livewire\MyOrderHistory;
+use App\Livewire\MyOrderPage;
 use App\Livewire\Checkoutpage;
 use App\Livewire\Contact;
 use App\Livewire\Admin;
@@ -19,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/',Home::class)->name('home');
 Route::get('/', Home::class)->name('home');
 Route::get('/products', Allproduct::class)->name('products');
-Route::get('/contacts', Contact::class)->name('contacts');
 Route::get('/products/{slug}', ProductDetailPage::class);
 
 Route::middleware('guest')->group(function () {
@@ -38,8 +39,16 @@ Route::get('/logout',function (){
     auth()->logout();
     return redirect()->to('/');
 });
-Route::get('/checkout', Checkoutpage::class)->name('checkout');
 });
+
+Route::middleware('auth')->group(function () {
+  Route::get('/my-orders', MyOrderPage::class)->name('success');
+Route::get('/checkout', Checkoutpage::class)->name('checkout');
+Route::get('/my-orders/{order_id}',MyOrderDetailPage::class);
+Route::get('/my-order-history',MyOrderHistory::class)->name('myorder');
+// Route::get('/cancel',CancelPage::class)->name('cancel');
+});
+
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');

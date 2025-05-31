@@ -11,8 +11,6 @@ class MyOrderPage extends Component
 {
 
 
-
-
     public function render()
     {
         $latest_order = Order::with('address')->where('user_id',auth()->user()->id)->latest()->first();

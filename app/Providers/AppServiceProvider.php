@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Filament\Panel;
 use Filament\PanelProvider;
+use App\Models\Category;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,7 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Only general app bootstrapping here
-        // Filament-specific configuration should be in AdminPanelProvider
+        View::composer('components.layouts.partials.app', function ($view) {
+        $view->with('categories', Category::all());
+    });
     }
 }

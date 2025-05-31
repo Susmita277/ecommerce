@@ -33,7 +33,7 @@ class Checkoutpage extends Component
             'city' => 'required',
             'street_address' => 'required',
             'payment_method' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|max:10',
         ]);
 
         $cart_items = CartManagement::getCartItemsFromCookie();
