@@ -14,6 +14,7 @@ class Allproduct extends Component
 {
     use WithPagination;
     #[Url]
+    public $search = '';
     public $selected_categories = [];
 
 
@@ -26,48 +27,43 @@ class Allproduct extends Component
     {
         $this->cart = CartManagement::get();
     }
- 
+   public function setSortOrder($order)
+{
+    $this->sortOrder = $order;
+    $this->resetPage(); // optional: reset to page 1 when sorting
+}
+
+public function addToCart($productId)
+{
+    $total_count = CartManagement::addToCart($productId);
+
+    // 🔥 Dispatch event to CartManager component
+    $this->dispatch('update-cart-count', total_count: $total_count);
+}
 
 
-    public function addToCart($productId)
-    {
-        $total_count = CartManagement::addToCart($productId);
-        $this->dispatch('update-cart-count',total_count:$total_count)->to(CartManager::class);
-        // $alreadyInCart = collect($this->cart)->pluck('product_id')->contains($productId);
 
-        // if ($alreadyInCart) {
-        //     $this->dispatch('cart-toast', [
-        //         'message' => 'Already in cart',
-        //         'type' => 'warning',
-        //     ]);
-        //     return;
-        // }
+      public function render()
+{
+    $productQuery = Product::query()->where('is_active', 1);
 
-        // \App\Helpers\CartManagement::addToCart($productId);
-        // $this->cart = \App\Helpers\CartManagement::get();
-
-        // $this->dispatch('cart-toast', [
-        //     'message' => 'Added to cart',
-        //     'type' => 'success',
-        // ]);
-
+    if (!empty($this->selected_categories)) {
+        $productQuery->whereIn('category_id', $this->selected_categories);
     }
 
-
-
-
-    public function render()
-    {
-        $productQuery = Product::query()->where('is_active', 1);
-
-        if (!empty($this->selected_categories)) {
-            $productQuery->whereIn('category_id', $this->selected_categories);
-        }
-
-        $categories = Category::all();
-        return view('livewire.allproduct', [
-            'products' => $productQuery->paginate(4),
-            'categories' => $categories,
-        ]);
+    // Sorting logic
+    if ($this->sortOrder === 'low') {
+        $productQuery->orderBy('price', 'asc');
+    } elseif ($this->sortOrder === 'high') {
+        $productQuery->orderBy('price', 'desc');
     }
+
+    $categories = Category::all();
+
+    return view('livewire.allproduct', [
+        'products' => $productQuery->paginate(4),
+        'categories' => $categories,
+    ]);
+}
+
 }
