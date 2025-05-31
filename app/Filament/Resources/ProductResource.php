@@ -46,6 +46,9 @@ class ProductResource extends Resource
                         TextInput::make('price')
                             ->numeric()
                             ->required(),
+                        TextInput::make('quantity')
+                            ->numeric()
+                            ->required(),
 
                         TextInput::make('discount')
                             ->numeric(),
@@ -86,7 +89,8 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                 ->searchable(),
                 Tables\Columns\TextColumn::make('mrp'),
-                Tables\Columns\TextColumn::make('slug')
+                Tables\Columns\TextColumn::make('slug'),
+                Tables\Columns\TextColumn::make('quantity')
 
             ])
             ->filters([
