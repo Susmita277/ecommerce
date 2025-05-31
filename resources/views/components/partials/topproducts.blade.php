@@ -14,12 +14,14 @@
       <div class=" grid grid-cols-4 gap-8 py-6 items-stretch">
           @foreach ($topProducts as $product)
               <div class="border border-gray-200 rounded-xl p-3 cursor-pointer">
-                  <div class="h-[200px] overflow-hidden rounded-xl">
-                      @foreach ($product->images as $image)
-                          <img src="{{ asset('storage/' . $image) }}"
-                              class="w-full h-full object-cover object-center" />
-                      @endforeach
-                  </div>
+                  <a href="/products/{{ $product->slug }}">
+                      <div class="h-[200px] overflow-hidden rounded-xl">
+                          @foreach ($product->images as $image)
+                              <img src="{{ asset('storage/' . $image) }}"
+                                  class="w-full h-full object-cover object-center" />
+                          @endforeach
+                      </div>
+                  </a>
                   <div class="py-2">
                       <h5 class="py-1">{{ $product->name }}</h5>
                       <h5 class="py-1">{{ $product->price }}</h5>
