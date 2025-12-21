@@ -15,7 +15,7 @@
         <div class="animate-spin h-12 w-12 border-4 border-[var(--color-primary)] border-t-transparent rounded-full">
         </div>
     </div>
-    <x-layouts.partials.header />
+    @livewire('header')
     {{ $slot }}
     <x-layouts.partials.footer />
 

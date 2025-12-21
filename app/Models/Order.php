@@ -16,7 +16,7 @@ public function user(){
     return $this->belongsTo(User::class);
 }
 public function orderitem(){
-    return $this->hasMany(OrderItem::class);
+    return $this->hasMany(Orderitem::class);
 }
 public function address(){
     return $this->hasOne(Address::class);

@@ -66,10 +66,7 @@ class ProductResource extends Resource
                             ->image()
                             ->multiple(),
                 
-                        Textarea::make('description')
-                            ->rows(4)
-                            ->extraAttributes(['style' => 'resize: none;']),
-
+                     
 
                         Toggle::make('is_active')
                             ->label('Active'),

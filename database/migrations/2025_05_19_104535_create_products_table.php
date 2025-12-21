@@ -19,7 +19,6 @@ return new class extends Migration
             $table->decimal('price');
             $table->decimal('mrp');
             $table->decimal('discount');
-            $table->longText('description');
             $table->json('images')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_stock')->default(true);
